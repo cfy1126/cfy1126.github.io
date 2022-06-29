@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Cao.F.Y
+title: farmer three punch
 subtitle: ''
-description: ''
+description: 'Liverpool are the champions'
 keywords:
-author: John Doe
+author: LinKenCao
 language: zh-CN
 timezone: ''
 
@@ -97,7 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: indigo
+theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

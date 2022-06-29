@@ -1,4 +1,5 @@
 ---
 title: categories
-date: 2022-06-27 20:35:36
+date: 2022-06-29 15:39:40
+type: 'categories'
 ---
