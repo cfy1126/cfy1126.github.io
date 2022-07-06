@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-06-29T10:16:21.024Z</updated>
+  <updated>2022-07-06T14:58:30.704Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,81 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>download-picture</title>
+    <link href="http://example.com/2022/07/06/download-picture/"/>
+    <id>http://example.com/2022/07/06/download-picture/</id>
+    <published>2022-07-06T22:39:56.000Z</published>
+    <updated>2022-07-06T14:58:30.704Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>前端下载api返回为图片格式</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">downloadDocument</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> http.<span class="title function_">get</span>(<span class="string">`<span class="subst">$&#123;path&#125;</span>?user_id=caofy@inhand.com.cn`</span>, &#123;</span><br><span class="line">    <span class="attr">responseType</span>: <span class="string">&#x27;blob&#x27;</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="title function_">downFile</span>(res.<span class="property">data</span>, <span class="string">&#x27;download&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">downFile</span> = (<span class="params">data, name</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (!data) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&#x27;数据错误！&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> <span class="variable constant_">BLOB</span> = <span class="keyword">new</span> <span class="title class_">Blob</span>([data])</span><br><span class="line">  <span class="keyword">let</span> url = <span class="variable language_">window</span>.<span class="property">URL</span>.<span class="title function_">createObjectURL</span>(<span class="variable constant_">BLOB</span>)</span><br><span class="line">  <span class="keyword">let</span> link = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">  link.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line">  link.<span class="property">href</span> = url</span><br><span class="line">  link.<span class="title function_">setAttribute</span>(<span class="string">&#x27;download&#x27;</span>, name)</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(link)</span><br><span class="line">  link.<span class="title function_">click</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;前端下载api返回为图片格式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="Javascript" scheme="http://example.com/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>react-pdf简单使用</title>
+    <link href="http://example.com/2022/07/06/React-PDF/"/>
+    <id>http://example.com/2022/07/06/React-PDF/</id>
+    <published>2022-07-06T22:27:14.000Z</published>
+    <updated>2022-07-06T14:58:30.704Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>参考demo</code>: <a href="https://github.com/recoding-io/react-videos/tree/main/react-pdf-viewer">https://github.com/recoding-io/react-videos/tree/main/react-pdf-viewer</a></p><p><code>官方文档</code>: <a href="https://projects.wojtekmaj.pl/react-pdf/">https://projects.wojtekmaj.pl/react-pdf/</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;code&gt;参考demo&lt;/code&gt;: &lt;a href=&quot;https://github.com/recoding-io/react-videos/tree/main/react-pdf-viewer&quot;&gt;https://github.com/recoding-io/reac</summary>
+      
+    
+    
+    
+    
+    <category term="React" scheme="http://example.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>uppy简单使用</title>
+    <link href="http://example.com/2022/07/06/uppy/"/>
+    <id>http://example.com/2022/07/06/uppy/</id>
+    <published>2022-07-06T22:20:10.000Z</published>
+    <updated>2022-07-06T14:58:30.704Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>参考demo</code>: <a href="https://github.com/cfy1126/react-upload-uppy">https://github.com/cfy1126/react-upload-uppy</a></p><p><code>官方文档</code>: <a href="https://uppy.io/docs/">https://uppy.io/docs/</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;code&gt;参考demo&lt;/code&gt;: &lt;a href=&quot;https://github.com/cfy1126/react-upload-uppy&quot;&gt;https://github.com/cfy1126/react-upload-uppy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code</summary>
+      
+    
+    
+    
+    
+    <category term="React" scheme="http://example.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
     <title>第一篇博客</title>
-    <link href="http://example.com/2022/06/29/hello-world/"/>
-    <id>http://example.com/2022/06/29/hello-world/</id>
-    <published>2022-06-29T09:51:42.351Z</published>
-    <updated>2022-06-29T10:16:21.024Z</updated>
+    <link href="http://example.com/2022/07/06/hello-world/"/>
+    <id>http://example.com/2022/07/06/hello-world/</id>
+    <published>2022-07-06T14:58:30.704Z</published>
+    <updated>2022-07-06T14:58:30.704Z</updated>
     
     <content type="html"><![CDATA[<p><strong>今天终于找到了一个自己比较满意的博客框架, butterfly!</strong></p>]]></content>
     
