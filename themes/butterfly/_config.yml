@@ -81,7 +81,7 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: /img/avatar.jpg
+  img: https://thumbnail0.baidupcs.com/thumbnail/40a5e5c18pe1c67480869175af212d06?fid=466198253-250528-859758472209396&time=1657278000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-bFIRf8KHz3LZpdYRWHwHvLfHhSE%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=8990955119215356432&dp-callid=0&file_type=0&size=c710_u400&quality=100&vuk=-&ft=video
   effect: false
 
 # Disable all banner image
