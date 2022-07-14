@@ -1,7 +1,7 @@
 ---
 title: react-pdf简单使用
 date: 2022-07-06 22:27:14
-tags: React
+tags: react
 ---
 
 `参考demo`: https://github.com/recoding-io/react-videos/tree/main/react-pdf-viewer
