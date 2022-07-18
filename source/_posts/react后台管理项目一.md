@@ -1,5 +1,5 @@
 ---
-title: react后台管理项目(一)
+title: react后台管理项目一
 date: 2022-07-14 08:18:57
 tags: react
 ---
