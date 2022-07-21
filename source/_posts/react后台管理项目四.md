@@ -13,7 +13,7 @@ tags: react
 - 替换原数组使用*this.setState({roles})* **简洁**
 - 组件基于原本的状态去修改
   ```javascript
-  this.setState(state => ({roles: [...state.roles],role})
+  this.setState(state => ({roles: [...state.roles,role]})
   ```
   `react富文本插件`：_react-draft-wysiwyg_
 
@@ -40,3 +40,13 @@ getMenus = () => this.state.checkedKeys
 ```
 
 `绑定事件`：绑定事件传递参数的写法 **()=> this.deleteUser(user)**
+
+`undefind`：防止出现undefind，写成三元运算符的形似
+
+`输入框`：取消输入的时候应该重置输入框
+
+`强制转换成布尔值`：
+```javascript
+return !!item.children.find((child) => menus.indexOf(child.key) !== -1)
+```
+*状态===属性 行为===函数*
