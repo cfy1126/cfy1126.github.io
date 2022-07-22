@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>微信小程序(一)</title>
+      <link href="/2022/07/22/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F(%E4%B8%80)/"/>
+      <url>/2022/07/22/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F(%E4%B8%80)/</url>
+      
+        <content type="html"><![CDATA[<h1 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 不可返回</span><br><span class="line">wx.<span class="title function_">redirectTo</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;../index/index&#x27;</span>,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 可返回：</span><br><span class="line">wx.<span class="title function_">navigateTo</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;/pages/register/index&#x27;</span>,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 跳转tabBar页面(原生组件)</span><br><span class="line">wx.<span class="title function_">switchTab</span>(<span class="title class_">Object</span> object)</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> 页面跳转（传值）</span><br><span class="line">&lt;navigator url=<span class="string">&quot;&quot;</span>&gt;&lt;/navigator&gt;</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> 传值接收</span><br><span class="line"><span class="title function_">onLoad</span>(<span class="params">options</span>) &#123;</span><br><span class="line">  <span class="comment">// 获取导航传过来的值</span></span><br><span class="line">  <span class="keyword">let</span> id = options.<span class="property">id</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>图片调整</code>：<em>mode&#x3D;”widthFix”</em></p><p><code>wx:key = &quot;_id&quot;</code><em>不用大括号，id前面要加下划线</em></p><h1 id="校验表单"><a href="#校验表单" class="headerlink" title="校验表单"></a>校验表单</h1><ol><li>是否必须输入</li><li>长度限制</li><li>匹配字符限制</li><li>空格处理</li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>react后台管理项目五</title>
       <link href="/2022/07/21/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%BA%94/"/>
       <url>/2022/07/21/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%BA%94/</url>
