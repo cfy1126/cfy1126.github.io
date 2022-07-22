@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>react后台管理项目五</title>
+      <link href="/2022/07/21/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%BA%94/"/>
+      <url>/2022/07/21/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%BA%94/</url>
+      
+        <content type="html"><![CDATA[<p><code>ref</code>操作使用：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="variable language_">super</span>(props)</span><br><span class="line">  <span class="comment">// 定义ref对象</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">numberRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定元素</span></span><br><span class="line">&lt;select ref=&#123;<span class="variable language_">this</span>.<span class="property">numberRef</span>&#125;&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;3&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 操作dom</span></span><br><span class="line">increment = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> number = <span class="variable language_">this</span>.<span class="property">numberRef</span>.<span class="property">current</span>.<span class="property">value</span> * <span class="number">1</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">props</span>.<span class="title function_">increment</span>(number)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>return</code>：返回结果如果是一个对象需要用括号<code>(&#123;&#125;)</code></p><p><code>react-redux插件</code>：解决react代码和redux代码耦合性太高的问题</p><p><code>redux</code><br><img src="/../img/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/redux%E5%8E%9F%E7%90%86.png" alt="redux原理"></p><p><code>react-redux</code><br><img src="/../img/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/redux%E5%8E%9F%E7%90%86.png" alt="react-redux原理"></p><p><code>redux-thunk</code></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redux最核心的管理对象</span></span><br><span class="line"><span class="comment"> * redux默认不支持异步</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">&#x27;./reducer&#x27;</span></span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">&#x27;redux-thunk&#x27;</span> <span class="comment">//用来实现redux异步的redux中间件插件</span></span><br><span class="line"><span class="comment">// redux调试工具</span></span><br><span class="line"><span class="keyword">import</span> &#123; composeWithDevTools &#125; <span class="keyword">from</span> <span class="string">&#x27;redux-devtools-extension&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">createStore</span>(reducer, <span class="title function_">composeWithDevTools</span>(<span class="title function_">applyMiddleware</span>(thunk))) <span class="comment">//创建store对象内部会第一次调用reducer</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步增加的action</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">incrementAsync</span> = (<span class="params">number</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 执行异步（定时器，promise）</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(<span class="title function_">increment</span>(number))</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>react后台管理项目四</title>
+      <link href="/2022/07/19/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%9B%9B/"/>
+      <url>/2022/07/19/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%9B%9B/</url>
+      
+        <content type="html"><![CDATA[<p><code>简单空格</code>：**&amp;nbsp**</p><p><code>请求</code>：<strong>收集数据–&gt;发送请求–&gt;响应处理–&gt;提示用户</strong></p><p><code>关于改变类组件状态</code>：</p><ul><li>替换原数组使用<em>this.setState({roles})</em> <strong>简洁</strong></li><li>组件基于原本的状态去修改<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function"><span class="params">state</span> =&gt;</span> (&#123;<span class="attr">roles</span>: [...state.<span class="property">roles</span>,role]&#125;)</span><br></pre></td></tr></table></figure><code>react富文本插件</code>：<em>react-draft-wysiwyg</em></li></ul><p><code>收集数据</code></p><ul><li><strong>form</strong></li><li><strong>ref</strong>(父组件收集子组件的数据）</li></ul><p><code>前台分页</code>：一次性查出所有的数据</p><p><code>组件传值</code>：<em>不修改组件传入的数据状态，只修改自己的数据状态</em></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">auth</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>()</span><br><span class="line"><span class="comment">// 得到最新的menus</span></span><br><span class="line"><span class="keyword">const</span> menus = <span class="variable language_">this</span>.<span class="property">auth</span>.<span class="property">current</span>.<span class="title function_">getMenus</span>()</span><br><span class="line">&lt;<span class="title class_">AuthForm</span> role=&#123;role&#125; ref=&#123;<span class="variable language_">this</span>.<span class="property">auth</span>&#125; /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 为父组件提供最新menus数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">getMenus = <span class="function">() =&gt;</span> <span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">checkedKeys</span></span><br></pre></td></tr></table></figure><p><code>绑定事件</code>：绑定事件传递参数的写法 <strong>()&#x3D;&gt; this.deleteUser(user)</strong></p><p><code>undefind</code>：防止出现undefind，写成三元运算符的形似</p><p><code>输入框</code>：取消输入的时候应该重置输入框</p><p><code>强制转换成布尔值</code>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> !!item.<span class="property">children</span>.<span class="title function_">find</span>(<span class="function">(<span class="params">child</span>) =&gt;</span> menus.<span class="title function_">indexOf</span>(child.<span class="property">key</span>) !== -<span class="number">1</span>)</span><br></pre></td></tr></table></figure><p><em>状态&#x3D;&#x3D;&#x3D;属性 行为&#x3D;&#x3D;&#x3D;函数</em></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>编程习惯</title>
+      <link href="/2022/07/18/%E7%BC%96%E7%A8%8B%E4%B9%A0%E6%83%AF/"/>
+      <url>/2022/07/18/%E7%BC%96%E7%A8%8B%E4%B9%A0%E6%83%AF/</url>
+      
+        <content type="html"><![CDATA[<p><code>react项目</code>：</p><ol><li><p>组件状态</p></li><li><p>首先写自定义函数</p></li><li><p>生命周期函数（抽离出自定义函数）</p></li><li><p>数据引用</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>api和sdk</title>
+      <link href="/2022/07/18/api%E5%92%8Csdk/"/>
+      <url>/2022/07/18/api%E5%92%8Csdk/</url>
+      
+        <content type="html"><![CDATA[<h1 id="API是什么"><a href="#API是什么" class="headerlink" title="API是什么"></a>API是什么</h1><p>API全称 <strong>Application Programming Interface</strong>，应用程序接口。</p><p>可以通过我之前的回答了解一下如何通俗解释API。</p><p><em>一般是指一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。</em></p><p>通俗来讲API就是可以轻松实现和其他软件的交互。</p><p><code>举个栗子</code>:</p><p><em>胖虎是一个程序猿，老板要求他写一个火车票查询的软件，胖虎想提高工作效率，于是在写火车票查询的代码中，引入了BinSTD平台的火车票查询的接口，这样子就可以轻松实现功能。</em></p><h1 id="SDK是什么"><a href="#SDK是什么" class="headerlink" title="SDK是什么"></a>SDK是什么</h1><p>SDK全称<strong>software development kit</strong>，软件开发工具包。</p><p><em>一般都是一些软件工程师为特定的软件包、软件框架、硬件平台、操作系统等建立应用软件时的开发工具的集合。</em></p><p>通俗来讲就是第三方服务商提供的实现产品软件某项功能的工具包。</p><p><code>再来举个栗子</code>：</p><p><em>老板让胖虎来完成BinSTD网站上的业务功能，胖虎觉得开发周期长，不利于公司产品上线，偶然机会了解到了华为云平台上的相关功能，于是在基于华为云SDK下，通过编码调用华为云API,就可以访问华为云的资源和数据</em>。</p><h1 id="API和SDK的区别"><a href="#API和SDK的区别" class="headerlink" title="API和SDK的区别"></a>API和SDK的区别</h1><ul><li><p>API是一个函数，有其特定的功能；而SDK是一个很多功能函数的集合体，一个工具包。</p></li><li><p>API是数据接口，SDK相当于开发集成工具环境，要在SDK的环境下来调用API。</p></li><li><p>API接口对接过程中需要的环境需要自己提供，SDK不仅提供开发环境，还提供很多API。<br><font size=5><em>简单功能调用，API调用方便快捷；复杂功能调用，SDK功能齐全。</em></font></p></li></ul><p><code>转载</code>：<a href="https://www.zhihu.com/question/21691705">链接</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>react后台管理项目三</title>
+      <link href="/2022/07/15/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%B8%89/"/>
+      <url>/2022/07/15/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%B8%89/</url>
+      
+        <content type="html"><![CDATA[<p><code>引入文件</code>：</p><ul><li>只有<strong>js</strong>和<strong>jsx</strong>可以省略后缀</li><li>export default 暴露导入文件可以写任意名字</li><li>export default 暴露导入时不用写中括号</li><li>export 统一导出导入时需要写中括号</li></ul><p><code>路由</code>：为谁设置二级路由，就在哪里配置</p><p><code>bug</code>:</p><ul><li>功能性 bug(报错）</li><li>异常 bug(不报错）</li></ul><h2 id="2-jsonp-解决-ajax-跨域的原理"><a href="#2-jsonp-解决-ajax-跨域的原理" class="headerlink" title="2. jsonp 解决 ajax 跨域的原理"></a>2. jsonp 解决 ajax 跨域的原理</h2><pre><code>1). jsonp只能解决GET类型的ajax请求跨域问题2). jsonp请求不是ajax请求, 而是一般的get请求3). 基本原理    浏览器端:        动态生成&lt;script&gt;来请求后台接口(src就是接口的url)        定义好用于接收响应数据的函数(fn), 并将函数名通过请求参数提交给后台(如: callback=fn)    服务器端:        接收到请求处理产生结果数据后, 返回一个函数调用的js代码, 并将结果数据作为实参传入函数调用    浏览器端:        收到响应自动执行函数调用的js代码, 也就执行了提前定义好的回调函数, 并得到了需要的结果数据</code></pre><p><code>find</code>:</p><ul><li>找到一个匹配的元素就返回这个元素，并且不再向下进行</li></ul><p><code>类组件生命周期</code>：</p><blockquote><p>组件卸载之前清除定时器</p></blockquote><ul><li>_挂载阶段_：constructor—&gt;render—&gt;componentDidMount</li><li>_更新阶段_：render—&gt;componentDidUpdate</li><li>_卸载阶段_：componentWillUnmount</li></ul><p><code>css</code>:</p><ul><li><em>伪元素</em></li><li><em>透明</em></li><li><em>移动</em></li><li><em>定位</em></li></ul><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.header-bottom-left</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">25%</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">50%</span>);</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border-top</span>: <span class="number">20px</span> solid <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">border-bottom</span>: <span class="number">20px</span> solid transparent;</span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">20px</span> solid transparent;</span><br><span class="line">    <span class="attribute">border-right</span>: <span class="number">20px</span> solid transparent;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>工具类</code>：</p><p><strong>格式化 date 对象</strong>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">formateDate</span>(<span class="params">time</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!time) <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>(time)</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    date.<span class="title function_">getFullYear</span>() +</span><br><span class="line">    <span class="string">&#x27;-&#x27;</span> +</span><br><span class="line">    (date.<span class="title function_">getMonth</span>() + <span class="number">1</span>) +</span><br><span class="line">    <span class="string">&#x27;-&#x27;</span> +</span><br><span class="line">    date.<span class="title function_">getDate</span>() +</span><br><span class="line">    <span class="string">&#x27; &#x27;</span> +</span><br><span class="line">    date.<span class="title function_">getHours</span>() +</span><br><span class="line">    <span class="string">&#x27;:&#x27;</span> +</span><br><span class="line">    date.<span class="title function_">getMinutes</span>() +</span><br><span class="line">    <span class="string">&#x27;:&#x27;</span> +</span><br><span class="line">    date.<span class="title function_">getSeconds</span>()</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>组件</code>：</p><ul><li><p>按钮封装成<code>a</code>标签效果</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">LinkButton</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> &#123;<span class="attr">...props</span>&#125; <span class="attr">className</span>=<span class="string">&quot;link-button&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.<span class="property">link</span>-button&#123;</span><br><span class="line">background-<span class="attr">color</span>: transparent;</span><br><span class="line"><span class="attr">border</span>: none;</span><br><span class="line"><span class="attr">outline</span>: none;</span><br><span class="line"><span class="attr">color</span>: #1da57a;</span><br><span class="line"><span class="attr">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>react后台管理项目二</title>
+      <link href="/2022/07/14/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%BA%8C/"/>
+      <url>/2022/07/14/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%BA%8C/</url>
+      
+        <content type="html"><![CDATA[<p><code>重置样式</code>：<img src="/../img/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86---%E7%99%BB%E5%BD%95/i.png"></p><p><code>img标签引入图片方式</code>：<img src="/../img/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86---%E7%99%BB%E5%BD%95/o.png"></p><p><code>高阶函数和高阶组件</code>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 高阶函数</span><br><span class="line">    <span class="number">1</span>). 一类特别的函数</span><br><span class="line">        a. 接受函数类型的参数</span><br><span class="line">        b. 返回值是函数</span><br><span class="line">    <span class="number">2</span>). 常见</span><br><span class="line">        a. 定时器: <span class="built_in">setTimeout</span>()/<span class="built_in">setInterval</span>()</span><br><span class="line">        b. <span class="title class_">Promise</span>: <span class="title class_">Promise</span>(<span class="function">() =&gt;</span> &#123;&#125;) <span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;&#125;, <span class="function"><span class="params">reason</span> =&gt;</span> &#123;&#125;)</span><br><span class="line">        c. 数组遍历相关的方法: <span class="title function_">forEach</span>()/<span class="title function_">filter</span>()/<span class="title function_">map</span>()/<span class="title function_">reduce</span>()/<span class="title function_">find</span>()/<span class="title function_">findIndex</span>()</span><br><span class="line">        d. 函数对象的<span class="title function_">bind</span>()</span><br><span class="line">        e. <span class="title class_">Form</span>.<span class="title function_">create</span>()() / <span class="title function_">getFieldDecorator</span>()()</span><br><span class="line">    <span class="number">3</span>). 高阶函数更新动态, 更加具有扩展性</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 高阶组件</span><br><span class="line">    <span class="number">1</span>). 本质就是一个函数</span><br><span class="line">    <span class="number">2</span>). 接收一个组件(被包装组件), 返回一个新的组件(包装组件), 包装组件会向被包装组件传入特定属性</span><br><span class="line">    <span class="number">3</span>). 作用: 扩展组件的功能</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 高阶组件与高阶函数的关系</span><br><span class="line">    高阶组件是特别的高阶函数</span><br><span class="line">    接收一个组件函数, 返回是一个新的组件函数</span><br></pre></td></tr></table></figure><p><code>登录表单处理</code>：</p><ul><li>收集数据</li><li>表单验证</li></ul><p><code>表单格式</code>：</p><ul><li>form-data</li><li>raw</li><li>binary</li><li>x-www-form-urlencoded(<strong>纯文本表单</strong>)</li></ul><p><code>暴露</code>：</p><ul><li><em>export default {}</em> 统一暴露</li><li><em>export</em> 分别暴露</li></ul><p><code>箭头函数</code>：箭头函数返回不写大括号，如果要写一定要写<strong>return</strong></p><p><code>跨域</code>：</p><ul><li>jsonp 只能处理 GET 请求</li><li>cors 通过后端允许</li><li>代理</li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>). 解决ajax跨域请求问题(开发时)</span><br><span class="line">    办法: 配置代理  ==&gt; 只能解决开发环境</span><br><span class="line">    编码: package.<span class="property">json</span>: <span class="attr">proxy</span>: <span class="string">&quot;http://localhost:5000&quot;</span></span><br><span class="line"><span class="number">4</span>). 对代理的理解</span><br><span class="line">    <span class="number">1</span>). 是什么?</span><br><span class="line">        具有特定功能的程序</span><br><span class="line">    <span class="number">2</span>). 运行在哪?</span><br><span class="line">        前台应用端</span><br><span class="line">        只能在开发时使用</span><br><span class="line">    <span class="number">3</span>). 作用?</span><br><span class="line">        解决开发时的ajax请求跨域问题</span><br><span class="line">        a. 监视并拦截请求(<span class="number">3000</span>)</span><br><span class="line">        b. 转发请求(<span class="number">4000</span>)</span><br><span class="line">    <span class="number">4</span>). 配置代理</span><br><span class="line">        告诉代理服务器一些信息: 比如转发的目标地址</span><br><span class="line">        开发环境: 前端工程师</span><br><span class="line">        生产环境: 后端工程师</span><br></pre></td></tr></table></figure><p><code>路由跳转</code></p><ul><li><p>事件回调函数路由跳转 this.prop.push() 和 this.prop.replace()区别</p><ol><li>push 层级结构回退</li><li>replace 回退不替换</li></ol></li><li><p>render()里跳转使用<Redirect /></p></li></ul><p><code>持续登录</code>：刷新不退出<br><code>自动登录</code>：关闭浏览器不退出</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>react后台管理项目一</title>
+      <link href="/2022/07/14/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%B8%80/"/>
+      <url>/2022/07/14/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%B8%80/</url>
+      
+        <content type="html"><![CDATA[<ol><li><p><code>数据库启动</code>：npm start</p></li><li><p><code>前端启动</code>：npm start</p></li><li><p><code>SPA</code>：single page application 单页应用</p></li><li><p><code>multer</code> 文件上传库</p></li><li><p><code>blueimp-md5</code> 加密库</p></li><li><p><code>mongoose</code>操作数据库</p></li><li><p><code>jsonp</code>请求</p></li><li><p><code>api</code></p><ol><li>请求(url、type、param)</li><li>响应（格式)</li></ol></li><li><p><code>mock</code>数据</p></li><li><p><code>组件</code></p><ol><li>components 非路由组件</li><li>pages 路由组件</li><li>组件名字大写不代表文件夹需要大写</li></ol></li><li><p><code>路由</code></p><ol><li>哈希路由和H5路由</li><li>路由映射</li><li><strong>习惯</strong>：除了根组件，其它所有的组件都命名为<code>jsx</code>后缀</li></ol></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>react中使用样式预处理less</title>
+      <link href="/2022/07/13/react%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86less/"/>
+      <url>/2022/07/13/react%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%B7%E5%BC%8F%E9%A2%84%E5%A4%84%E7%90%86less/</url>
+      
+        <content type="html"><![CDATA[<p><code>安装craco</code>: yarn add @craco&#x2F;craco</p><p><code>安装craco-less</code>：yarn add craco-less</p><p>创建<code>craco.config.js</code>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CracoLessPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;craco-less&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">plugin</span>: <span class="title class_">CracoLessPlugin</span>,</span><br><span class="line">      <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="attr">lessLoaderOptions</span>: &#123;</span><br><span class="line">          <span class="attr">lessOptions</span>: &#123;</span><br><span class="line">            <span class="attr">modifyVars</span>: &#123; <span class="string">&#x27;@primary-color&#x27;</span>: <span class="string">&#x27;#1DA57A&#x27;</span> &#125;,</span><br><span class="line">            <span class="attr">javascriptEnabled</span>: <span class="literal">true</span>,</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><code>antd</code>自定义主题<br><img src="/../img/react%E4%BD%BF%E7%94%A8less%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/i.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue后台管理系统</title>
+      <link href="/2022/07/13/vue%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
+      <url>/2022/07/13/vue%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
+      
+        <content type="html"><![CDATA[<p><code>业务逻辑</code>：</p><blockquote><ol><li>管理员新增角色</li><li>为角色指定可见菜单和操作权限</li><li>色分配到指定的用户</li><li>用户登录系统查看权限</li></ol></blockquote><p><code>演示博客：</code> <a href="https://blog.csdn.net/weixin_42512937/article/details/101106950">转载</a></p><p><code>项目地址</code>：<a href="https://github.com/HilaryHA/RolePerMenManageProject">转载</a></p><p><code>注意版本</code>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Node</span>.<span class="property">js</span> == v10<span class="number">.13</span><span class="number">.0</span></span><br><span class="line"><span class="title class_">Npm</span> == <span class="number">6.10</span><span class="number">.3</span></span><br><span class="line"><span class="title class_">Vue</span> == <span class="number">2.5</span><span class="number">.2</span></span><br><span class="line">vue-router == <span class="number">3.0</span><span class="number">.1</span></span><br><span class="line">element-ui == ^<span class="number">2.12</span><span class="number">.0</span></span><br></pre></td></tr></table></figure><p><code>导入数据库</code></p><ol><li><p>MongoDB之数据的备份、还原、导出、导入等简单操作<a href="https://blog.csdn.net/weixin_42512937/article/details/102498644">转载</a>—<em>最后一个方法</em></p></li><li><p>修改数据库名称<br><img src="/../img/vue%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/i.png"></p></li><li><p><code>bug:</code> ‘mongodump‘ 不是内部或外部命令，也不是可运行的程序 或批处理文件. <font size=5><strong>解决：</strong></font> <a href="https://blog.csdn.net/hqy_Angel/article/details/118724596">转载</a></p></li></ol><p><code>运行项目</code></p><ol><li>指定运行ip和端口<br><img src="/../img/vue%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/o.png"></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>阿里巴巴图标库使用</title>
+      <link href="/2022/07/12/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%9B%BE%E6%A0%87%E5%BA%93%E4%BD%BF%E7%94%A8/"/>
+      <url>/2022/07/12/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%9B%BE%E6%A0%87%E5%BA%93%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="下载相关图标"><a href="#下载相关图标" class="headerlink" title="下载相关图标"></a>下载相关图标</h1><p><img src="/img/../../img/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%9B%BE%E6%A0%87%E5%BA%93/i.png"></p><h1 id="导入和使用"><a href="#导入和使用" class="headerlink" title="导入和使用"></a>导入和使用</h1><blockquote><p>注意路径匹配</p></blockquote><p><img src="/img/../../img/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%9B%BE%E6%A0%87%E5%BA%93/o.png"></p><h1 id="获取项目图标的在线链接"><a href="#获取项目图标的在线链接" class="headerlink" title="获取项目图标的在线链接"></a>获取项目图标的在线链接</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>补补css</title>
+      <link href="/2022/07/12/%E8%A1%A5%E8%A1%A5css/"/>
+      <url>/2022/07/12/%E8%A1%A5%E8%A1%A5css/</url>
+      
+        <content type="html"><![CDATA[<h1 id="外边距塌陷-margin-collapsing"><a href="#外边距塌陷-margin-collapsing" class="headerlink" title="外边距塌陷(margin collapsing)"></a>外边距塌陷(margin collapsing)</h1><ol><li><p>只会发生在垂直方向上，不会发生在水平方向<br><img src="/img/../../img/margin%20collapsing/i.png" alt="header"></p></li><li><p>父元素和子元素没有内容</p><blockquote><p>父元素包裹子元素，且在同一方向上没有padding和border<br><code>解决办法</code>：在同一方向上设置padding和border</p></blockquote></li></ol><p><img src="/img/../../img/margin%20collapsing/o.png" alt="header"></p><ol><li>空元素<br><img src="/img/../../img/margin%20collapsing/p.png" alt="header"></li></ol><h1 id="内联元素和行内块元素"><a href="#内联元素和行内块元素" class="headerlink" title="内联元素和行内块元素"></a>内联元素和行内块元素</h1><p><code>内联元素</code>：宽高以及到顶部和底部的边距都不可以进行设置<br><code>行内块元素</code>：内容在一行，其它设置和块元素相同</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ps小萌新</title>
+      <link href="/2022/07/11/ps%E5%B0%8F%E8%90%8C%E6%96%B0/"/>
+      <url>/2022/07/11/ps%E5%B0%8F%E8%90%8C%E6%96%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="工具面板"><a href="#工具面板" class="headerlink" title="工具面板"></a>工具面板</h1><ol><li><p>添加文字<code>T键</code></p></li><li><p>放大镜<code>Z键</code>（Alt切换）</p></li><li><p>抓手<code>H键</code>（移动画布）</p></li><li><p>常用新建工作区：<strong>导航器</strong>，<strong>画笔</strong>，<strong>字符</strong></p></li></ol><h1 id="图层面板"><a href="#图层面板" class="headerlink" title="图层面板"></a>图层面板</h1><ol><li><p><code>混合模式</code>：滤色（滤去深色）</p></li><li><p><code>文字立体感</code>：可投影（图层样式）</p></li></ol><h1 id="图片裁剪"><a href="#图片裁剪" class="headerlink" title="图片裁剪"></a>图片裁剪</h1><ol><li>图像→画布大小【需要先解除锁定】：Ctrl+T【自动变换工具】选中图片，shift等比例缩放，Alt中心缩放</li></ol><h1 id="蒙版"><a href="#蒙版" class="headerlink" title="蒙版"></a>蒙版</h1><ol><li><code>图片合成</code>：不破坏原始素材进行修改<br>拖动→添加蒙版（细微修改：流量、不透明度）→画笔（黑透白不透）</li></ol><h1 id="校色"><a href="#校色" class="headerlink" title="校色"></a>校色</h1><p>新建调整图层→曲线（调节明暗）、色彩平衡<br>【只影响下一张图片：创建剪切图层】</p><h1 id="钢笔工具"><a href="#钢笔工具" class="headerlink" title="钢笔工具"></a>钢笔工具</h1><ol><li><code>抠图</code>：不用选区和蒙版（蒙版抠图柔和不精确）</li><li><code>曲线</code>：按住左键←直线（Alt：转换点工具&#x2F;一侧变换点击一端点）<ol><li><strong>Ctrl</strong>：改变锚点位置</li><li><strong>增加锚点</strong>：点击两点之间</li><li><strong>减少锚点</strong>：点击一点</li><li><strong>系统新建形状</strong>：Ctrl+Z退回，惦记着最后一个点连接</li></ol></li></ol><h1 id="修片"><a href="#修片" class="headerlink" title="修片"></a>修片</h1><p>① <code>修复红眼</code>：使用红眼修复工具（需选中整个眼睛）</p><p>② <code>污渍修复工具</code>：可小地方修修改→就近取色</p><p>③ <code>修复画笔工具</code>：Alt+拾色（可任取色，且过渡更自然）</p><p>④ <code>仿制图章</code>：Alt+拾色（任取色，过渡相对不是和和谐）</p><p>⑤ <code>修补工具</code>: 去水印</p><h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><ol><li><p><code>文字</code>：选“平滑”消除锯齿，调整字体和间距</p></li><li><p><code>制作光晕</code>：使用智能对象（智能对象：可无限期修改）<br>新建图层→填充前景黑色→滤镜&#x2F;渲染&#x2F;光线<br>混合模式：【滤色】<br>裁剪：【先修改比例等默认值】<br>画笔工具：【→缩小，】→放大（在英文非大写状态）<br>【分开调色】：建立组（必须勾选此组有效）<br>【剪影】：使用钢笔选中建立选区使用蒙板纯色填充之后→复制→在第一个图层添加图层样式“色彩叠加”→移动→→使用【渐变映射整体调整】</p></li></ol><h1 id="快捷键来个小结"><a href="#快捷键来个小结" class="headerlink" title="快捷键来个小结"></a>快捷键来个小结</h1><p>✔<code>Ctrl+J</code>：直接复制所选背景图片</p><p>✔<code>Ctrl+Z</code>：撤回一步</p><p>✔<code>Ctrl+Alt+Z</code>：后退多步（会有一定的步数限制），（貌似在新版本中该项与楼上合并）</p><p>✔<code>Ctrl+±</code>：放大或缩小图片</p><p>✔<code>Ctrl+0</code>：直接使图片恢复至初始视图</p><p>✔<code>Ctrl+↑↓←→</code>：小幅度移动所选择的图片</p><p>✔<code>Ctrl+T</code>：进入自由变换，直接选中图片进行位置和大小调整</p><p>✔<code>P</code>旁边的左右括号键（英文且未开大写）：缩放或扩大橡皮擦画笔大小，极大和极小时会变成一个加号，极小时加号中间有一个小点点</p><p>✔<code>Alt+Shift</code>：以中心点为轴进行同比缩放</p><p>✔<code>Alt+delete</code>：填充前景颜色（或者直接用油漆桶）</p><p>✔<code>Ctrl_R</code>：标尺工具</p><p><font size='5'><em>调整成功后，应当使用双击或者回车键进行确定，以便进行其他步骤的操作</em></font></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ps </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>连个打印机</title>
+      <link href="/2022/07/11/%E8%BF%9E%E4%B8%AA%E6%89%93%E5%8D%B0%E6%9C%BA/"/>
+      <url>/2022/07/11/%E8%BF%9E%E4%B8%AA%E6%89%93%E5%8D%B0%E6%9C%BA/</url>
+      
+        <content type="html"><![CDATA[<p><code>连接</code>：</p><ol><li><p>根据型号连接对应的打印机<br><img src="/img/../../img/%E6%89%93%E5%8D%B0%E6%9C%BA/%E6%89%93%E5%8D%B0%E6%9C%BA.png" alt="header"></p></li><li><p>关闭<em>防火墙</em>和<em>杀毒软件</em></p></li><li><p>选择对应的<font size=4><strong>型号</strong></font>和<font size=4><strong>IP地址</strong></font>连接</p></li><li><p>开始打印！go! go! go!</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电脑 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>新手剪辑发车了</title>
+      <link href="/2022/07/10/%E6%96%B0%E6%89%8B%E5%89%AA%E8%BE%91%E5%8F%91%E8%BD%A6%E4%BA%86/"/>
+      <url>/2022/07/10/%E6%96%B0%E6%89%8B%E5%89%AA%E8%BE%91%E5%8F%91%E8%BD%A6%E4%BA%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="关于软件布局"><a href="#关于软件布局" class="headerlink" title="关于软件布局"></a>关于软件布局</h1><blockquote><p>注意导入本地素材格式软件是否支持</p></blockquote><ol><li>素材区</li><li>时间线</li><li>画面调整区</li></ol><h1 id="关于时间线区域"><a href="#关于时间线区域" class="headerlink" title="关于时间线区域"></a>关于时间线区域</h1><p><code>主轨道</code>:</p><ol><li>图片显示时间增加和缩短</li><li>视频只能缩短</li></ol><p><code>其它轨道</code>：</p><ol><li>上层轨道覆盖下层轨道</li><li>拖拽可以往一个新轨道添加素材，点击加号只能往主轨道添加素材</li><li>没有选定分割素材轨道，默认分割主轨道</li></ol><p><code>功能</code>：</p><ol><li><em>定格功能</em> 在指定的某一帧停止几秒钟（本质是一张图片）<strong>视频</strong></li><li><em>倒放</em></li><li><em>镜像</em>（图片和视频均可）</li><li><em>关闭原声</em> 只对主轨道的素材起作用</li><li><em>吸附功能</em> 用于素材拼接</li><li><em>旋转</em></li><li><em>剪切</em></li></ol><h1 id="画面调整区"><a href="#画面调整区" class="headerlink" title="画面调整区"></a>画面调整区</h1><ol><li><p>缩放、不透明度、美颜、混合模式（确保选中素材）</p></li><li><p><code>音频</code></p><ol><li>先添加其它素材，再添加音频素材</li><li>拖拽放在任何位置，点击加号到指针位置</li><li>自动踩点</li><li>手动踩点</li><li>清空踩点</li></ol></li><li><p><code>变速</code></p><ol><li>声音变调（一般不打开）</li></ol></li><li><p><code>动画</code></p><ol><li>设置动画时常</li></ol></li><li><p><code>调节</code></p><ol><li>主要对亮度、对比度、饱和度（色彩调节）</li></ol></li><li><p><code>文本</code></p><ol><li>识别视频字幕</li><li>识别音乐字幕</li><li>通过素材的颜色区分素材</li></ol></li></ol><h1 id="素材区"><a href="#素材区" class="headerlink" title="素材区"></a>素材区</h1><ol><li><p><code>贴纸</code></p><ol><li>左边入场的动画时长</li><li>右边出场的动画时长</li></ol></li><li><p>特效</p></li><li><p><code>转场</code>：加载两段素材之间</p></li><li><p><code>滤镜</code>：导出前加滤镜</p></li><li><p><code>调节</code>：不使用预设的滤镜，自己自定义调色</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剪辑 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>有认真的学习标点符号</title>
+      <link href="/2022/07/09/%E6%9C%89%E8%AE%A4%E7%9C%9F%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7/"/>
+      <url>/2022/07/09/%E6%9C%89%E8%AE%A4%E7%9C%9F%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7/</url>
+      
+        <content type="html"><![CDATA[<p><code>顿号</code>：表示并列<strong>词语</strong>之间的停顿</p><p><code>逗号</code>：表示一句话中间的停顿（可以有递进关系）</p><p><code>分号</code>：表示并列关系<strong>分句</strong>之间的停顿(<font size='4'><em>并列分句内部有了逗号，这并列分句间才能用分号</em></font>)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分辨率让我emmo</title>
+      <link href="/2022/07/08/%E5%88%86%E8%BE%A8%E7%8E%87%E8%AE%A9%E6%88%91emmo/"/>
+      <url>/2022/07/08/%E5%88%86%E8%BE%A8%E7%8E%87%E8%AE%A9%E6%88%91emmo/</url>
+      
+        <content type="html"><![CDATA[<ol><li><p><code>物理分辨率</code>： 显示屏最高可显示的像素</p></li><li><p><code>分辨率</code>：可调节改变</p></li><li><p><code>物理像素</code>：设备像素点</p></li><li><p><code>逻辑像素</code>（css像素）：iphone6举例；逻辑像素375px 物理像素750px</p></li><li><p><code>像素比</code>（dpr: device pixel ratio)</p><ol><li>计算公式：同一方向的物理像素&#x2F;css像素</li><li>dpr &#x3D; 2 表示1个css像素需要2*2个设备像素来绘制</li></ol></li><li><p><code>缩放</code>： 缩放逻辑像素</p></li><li><p><code>PPI(DPI)</code>: 每英寸像素点</p></li></ol><p><em>感谢大神奉献</em>：()[<a href="https://blog.csdn.net/qq_34115899/article/details/105566707]">https://blog.csdn.net/qq_34115899/article/details/105566707]</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电脑 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的垃圾电脑为啥可以播放4k视频？</title>
+      <link href="/2022/07/08/%E6%88%91%E7%9A%84%E5%9E%83%E5%9C%BE%E7%94%B5%E8%84%91%E4%B8%BA%E5%95%A5%E5%8F%AF%E4%BB%A5%E6%92%AD%E6%94%BE4k%E8%A7%86%E9%A2%91%EF%BC%9F/"/>
+      <url>/2022/07/08/%E6%88%91%E7%9A%84%E5%9E%83%E5%9C%BE%E7%94%B5%E8%84%91%E4%B8%BA%E5%95%A5%E5%8F%AF%E4%BB%A5%E6%92%AD%E6%94%BE4k%E8%A7%86%E9%A2%91%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<p><font size=5>最后以我个人的经验来看（再次强调以下都是基于互联网上各类传播的经验，与理论并不是那么紧密），播放设备与片源的分辨率差距在3倍大概是人眼能分辨的极限，比如一个720p的屏幕（常见垃圾笔记本），放4K仍然比放1080p有肉眼可见的提升，但是放8K比放4K就看不出来啥了，所以说分辨率高真的很有用！</font></p><p><code>转载于</code>: ()[<a href="https://www.bilibili.com/read/cv6233898/]">https://www.bilibili.com/read/cv6233898/]</a><br><code>html中空格汇总</code>：()[<a href="https://www.jianshu.com/p/160e5cb0209c]">https://www.jianshu.com/p/160e5cb0209c]</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电脑 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>小程序实战项目-商城-首页</title>
+      <link href="/2022/07/08/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE-%E5%95%86%E5%9F%8E-%E9%A6%96%E9%A1%B5/"/>
+      <url>/2022/07/08/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE-%E5%95%86%E5%9F%8E-%E9%A6%96%E9%A1%B5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="搜索栏"><a href="#搜索栏" class="headerlink" title="搜索栏"></a>搜索栏</h1><h1 id="广告位"><a href="#广告位" class="headerlink" title="广告位"></a>广告位</h1><ol><li><strong>轮播图组件属性</strong><ol><li><code>autoplay</code> 自动播放</li><li><code>indicator-dots</code> 图片圆点</li><li><code>circular</code> 循环播放</li></ol></li></ol><h1 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h1><h1 id="产品"><a href="#产品" class="headerlink" title="产品"></a>产品</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> wechat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>flex布局</title>
+      <link href="/2022/07/08/flex%E5%B8%83%E5%B1%80/"/>
+      <url>/2022/07/08/flex%E5%B8%83%E5%B1%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="用于父元素的属性"><a href="#用于父元素的属性" class="headerlink" title="用于父元素的属性"></a>用于父元素的属性</h1><ol><li><p><code>justify-content</code> 主轴元素排列方式</p><blockquote><ol><li>center</li><li>flex-start</li><li>flex-end</li><li>space-between</li><li>space-around</li><li>space-evenly <strong>间隔均匀分布</strong></li></ol></blockquote></li><li><p><code>align-items</code> 交叉轴的元素排列方式</p></li><li><p><code>flex-direction</code> 排列方式</p></li><li><p><code>flex-wrap</code> 元素是否可换行</p></li></ol><h1 id="用于子元素的属性"><a href="#用于子元素的属性" class="headerlink" title="用于子元素的属性"></a>用于子元素的属性</h1><ol><li><code>flex-grow</code> 占据盒子剩余空间<blockquote><p>flex-grow: 1</p></blockquote></li><li><code>flex-shrink</code> 不换行是否可压缩<blockquote><p>flex-shrink: 0</p></blockquote></li><li><code>flex-basis</code> 盒子初始值</li><li><code>flex</code> 前三项的缩写<blockquote><p>flex-grow: 1 等价于 flex: 1</p></blockquote></li><li><code>align-self</code> 覆盖父元素指定交叉轴的属性align-items</li><li><code>order</code> 指定元素的排列顺序；<strong>order</strong>越大排序越后</li><li><code>z-order</code> 元素重叠时，值较大的会在上层显示</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>小程序云开发</title>
+      <link href="/2022/07/07/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/"/>
+      <url>/2022/07/07/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="上传数据到云端"><a href="#上传数据到云端" class="headerlink" title="上传数据到云端"></a>上传数据到云端</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化云端数据库</span></span><br><span class="line"><span class="keyword">const</span> db = wx.<span class="property">cloud</span>.<span class="title function_">database</span>()</span><br><span class="line"><span class="keyword">const</span> products = db.<span class="title function_">collection</span>(<span class="string">&#x27;products&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">  <span class="title function_">onSubmit</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="comment">//添加数据到云端</span></span><br><span class="line">    products</span><br><span class="line">      .<span class="title function_">add</span>(&#123;</span><br><span class="line">        <span class="attr">data</span>: &#123;</span><br><span class="line">          ...event.<span class="property">detail</span>.<span class="property">value</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;)</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h1 id="从云端获取数据"><a href="#从云端获取数据" class="headerlink" title="从云端获取数据"></a>从云端获取数据</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化云端数据库</span></span><br><span class="line"><span class="keyword">const</span> db = wx.<span class="property">cloud</span>.<span class="title function_">database</span>()</span><br><span class="line"><span class="keyword">const</span> products = db.<span class="title function_">collection</span>(<span class="string">&#x27;products&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">products</span>: [],</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">onLoad</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//从云端获取数据</span></span><br><span class="line">    products.<span class="title function_">get</span>().<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">        <span class="attr">products</span>: res.<span class="property">data</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h1 id="修改删除云数据"><a href="#修改删除云数据" class="headerlink" title="修改删除云数据"></a>修改删除云数据</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化云端数据库</span></span><br><span class="line"><span class="keyword">const</span> db = wx.<span class="property">cloud</span>.<span class="title function_">database</span>()</span><br><span class="line"><span class="keyword">const</span> products = db.<span class="title function_">collection</span>(<span class="string">&#x27;products&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">product</span>: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">onLoad</span>(<span class="params">options</span>) &#123;</span><br><span class="line">    <span class="comment">// 获取导航传过来的值</span></span><br><span class="line">    <span class="keyword">let</span> id = options.<span class="property">id</span></span><br><span class="line">    products</span><br><span class="line">      .<span class="title function_">doc</span>(id)</span><br><span class="line">      .<span class="title function_">get</span>()</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">          <span class="attr">product</span>: res.<span class="property">data</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//修改云端数据</span></span><br><span class="line">    products</span><br><span class="line">      .<span class="title function_">doc</span>(<span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">product</span>.<span class="property">_id</span>)</span><br><span class="line">      .<span class="title function_">update</span>(&#123;</span><br><span class="line">        <span class="attr">data</span>: &#123;</span><br><span class="line">          <span class="attr">price</span>: <span class="number">399</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;)</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">del</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 删除云端数据</span></span><br><span class="line">    products</span><br><span class="line">      .<span class="title function_">doc</span>(<span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">product</span>.<span class="property">_id</span>)</span><br><span class="line">      .<span class="title function_">remove</span>()</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h1 id="云函数"><a href="#云函数" class="headerlink" title="云函数"></a>云函数</h1><p><code>上传并部署云函数需安装</code>: npm install –save wx-server-sdk@latest</p><p><code>添加数据云函数</code>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 云函数入口文件</span></span><br><span class="line"><span class="keyword">const</span> cloud = <span class="built_in">require</span>(<span class="string">&#x27;wx-server-sdk&#x27;</span>)</span><br><span class="line"></span><br><span class="line">cloud.<span class="title function_">init</span>(&#123;</span><br><span class="line">  <span class="comment">// 指定环境</span></span><br><span class="line">  <span class="attr">evn</span>: <span class="string">&#x27;invoice-inhand-9g86mm1bfec63201&#x27;</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> db = cloud.<span class="title function_">database</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 云函数入口函数</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">main</span> = <span class="keyword">async</span> (event, context) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> wxContext = cloud.<span class="title function_">getWXContext</span>()</span><br><span class="line">  <span class="comment">//指定云函数功能</span></span><br><span class="line">  <span class="keyword">return</span> db.<span class="title function_">collection</span>(<span class="string">&#x27;users&#x27;</span>).<span class="title function_">add</span>(&#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">      <span class="attr">name</span>: event.<span class="property">name</span>,</span><br><span class="line">      <span class="attr">pwd</span>: event.<span class="property">pwd</span>,</span><br><span class="line">      <span class="attr">_openid</span>: wxContext.<span class="property">OPENID</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>调用云函数</code>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="title function_">onLoad</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 调用云函数做添加操作</span></span><br><span class="line">    wx.<span class="property">cloud</span></span><br><span class="line">      .<span class="title function_">callFunction</span>(&#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;addUser&#x27;</span>,</span><br><span class="line">        <span class="attr">data</span>: &#123;</span><br><span class="line">          <span class="attr">name</span>: <span class="string">&#x27;Caofayou&#x27;</span>,</span><br><span class="line">          <span class="attr">pwd</span>: <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;)</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><blockquote><ol><li>数据获取处理</li><li>非空校验和格式校验</li><li>错误提示</li><li>页面跳转</li><li>保存用户信息</li></ol></blockquote><p><code>处理用户数据</code>：<br><img src="/../img/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/i.png"></p><p><code>登录成功和失败</code>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">users</span><br><span class="line">  .<span class="title function_">where</span>(&#123;</span><br><span class="line">    <span class="attr">name</span>: username,</span><br><span class="line">    <span class="attr">pwd</span>: pwd,</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">get</span>()</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 登录成功</span></span><br><span class="line">    <span class="keyword">if</span> (res.<span class="property">data</span>[<span class="number">0</span>] == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">        <span class="attr">show</span>: <span class="literal">true</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//登录失败</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">        <span class="attr">show</span>: <span class="literal">false</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      app.<span class="property">appUser</span> = res.<span class="property">data</span>[<span class="number">0</span>]</span><br><span class="line">      wx.<span class="title function_">redirectTo</span>(&#123;</span><br><span class="line">        <span class="attr">url</span>: <span class="string">&#x27;../index/index&#x27;</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> wechat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>网页单位汇总</title>
+      <link href="/2022/07/07/%E7%BD%91%E9%A1%B5%E5%8D%95%E4%BD%8D%E6%B1%87%E6%80%BB/"/>
+      <url>/2022/07/07/%E7%BD%91%E9%A1%B5%E5%8D%95%E4%BD%8D%E6%B1%87%E6%80%BB/</url>
+      
+        <content type="html"><![CDATA[<p><code>em</code>: 相对于父元素<br><code>rem</code>: 相对于根元素</p><p><img src="/img/%E7%BD%91%E9%A1%B5%E5%8D%95%E4%BD%8D.png" alt="header"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>前端下载图片</title>
+      <link href="/2022/07/06/download-picture/"/>
+      <url>/2022/07/06/download-picture/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>前端下载api返回为图片格式</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">downloadDocument</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> http.<span class="title function_">get</span>(<span class="string">`<span class="subst">$&#123;path&#125;</span>?user_id=caofy@inhand.com.cn`</span>, &#123;</span><br><span class="line">    <span class="attr">responseType</span>: <span class="string">&#x27;blob&#x27;</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="title function_">downFile</span>(res.<span class="property">data</span>, <span class="string">&#x27;download&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">downFile</span> = (<span class="params">data, name</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (!data) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&#x27;数据错误！&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> <span class="variable constant_">BLOB</span> = <span class="keyword">new</span> <span class="title class_">Blob</span>([data])</span><br><span class="line">  <span class="keyword">let</span> url = <span class="variable language_">window</span>.<span class="property">URL</span>.<span class="title function_">createObjectURL</span>(<span class="variable constant_">BLOB</span>)</span><br><span class="line">  <span class="keyword">let</span> link = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">  link.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line">  link.<span class="property">href</span> = url</span><br><span class="line">  link.<span class="title function_">setAttribute</span>(<span class="string">&#x27;download&#x27;</span>, name)</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(link)</span><br><span class="line">  link.<span class="title function_">click</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> javascript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>react-pdf简单使用</title>
+      <link href="/2022/07/06/React-PDF/"/>
+      <url>/2022/07/06/React-PDF/</url>
+      
+        <content type="html"><![CDATA[<p><code>参考demo</code>: <a href="https://github.com/recoding-io/react-videos/tree/main/react-pdf-viewer">https://github.com/recoding-io/react-videos/tree/main/react-pdf-viewer</a></p><p><code>官方文档</code>: <a href="https://projects.wojtekmaj.pl/react-pdf/">https://projects.wojtekmaj.pl/react-pdf/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>uppy简单使用</title>
+      <link href="/2022/07/06/uppy/"/>
+      <url>/2022/07/06/uppy/</url>
+      
+        <content type="html"><![CDATA[<p><code>参考demo</code>: <a href="https://github.com/cfy1126/react-upload-uppy">https://github.com/cfy1126/react-upload-uppy</a></p><p><code>官方文档</code>: <a href="https://uppy.io/docs/">https://uppy.io/docs/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
