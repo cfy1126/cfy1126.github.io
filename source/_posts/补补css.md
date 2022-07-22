@@ -2,6 +2,7 @@
 title: 补补css
 date: 2022-07-12 08:25:58
 tags: css
+categories: 技术
 ---
 
 # 外边距塌陷(margin collapsing)

@@ -3,15 +3,14 @@
 # --------------------------------------
 
 menu:
-  Home: / || fas fa-home
-  Archives: /archives/ || fas fa-archive
-  Tags: /tags/ || fas fa-tags
-  Categories: /categories/ || fas fa-folder-open
-  List||fas fa-list:
-    Music: /music/ || fas fa-music
-    Movie: /movies/ || fas fa-video
-  Link: /link/ || fas fa-link
-  About: /about/ || fas fa-heart
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  # List||fas fa-list:
+  #   Music: /music/ || fas fa-music
+  #   Movie: /movies/ || fas fa-video
+  # Link: /link/ || fas fa-link
+  # About: /about/ || fas fa-heart
 
 # Code Blocks (代碼相關)
 # --------------------------------------
@@ -22,7 +21,6 @@ highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
 highlight_height_limit: false # unit: px
 code_word_wrap: false
-
 
 # copy settings
 # copyright: Add the copyright information after copied content (複製的內容後面加上版權信息)
@@ -35,10 +33,8 @@ copy:
 # social settings (社交圖標設置)
 # formal:
 #   icon: link || the description
-social:
-  fab fa-github: https://github.com/xxxxx || Github
-  fas fa-envelope: mailto:xxxxxx@gmail.com || Email
-
+# social:
+#   fab fa-github: https://github.com/cfy1126 || Github
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系統
 # --------------------------------------
@@ -51,7 +47,7 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: false
+  enable: true
   preload: false
   CDN:
 
@@ -81,7 +77,7 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: https://thumbnail0.baidupcs.com/thumbnail/40a5e5c18pe1c67480869175af212d06?fid=466198253-250528-859758472209396&time=1657278000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-bFIRf8KHz3LZpdYRWHwHvLfHhSE%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=8990955119215356432&dp-callid=0&file_type=0&size=c710_u400&quality=100&vuk=-&ft=video
+  img: /img/avatar.jpg
   effect: false
 
 # Disable all banner image
@@ -116,9 +112,9 @@ category_per_img:
 
 cover:
   # display the cover or not (是否顯示文章封面)
-  index_enable: true
-  aside_enable: true
-  archives_enable: true
+  index_enable: false
+  aside_enable: false
+  archives_enable: false
   # the position of cover in home page (封面顯示的位置)
   # left/right/both
   position: both
@@ -406,10 +402,10 @@ crisp:
 # --------------------------------------
 footer:
   owner:
-    enable: true
+    enable: false
     since: 2020
   custom_text:
-  copyright: true # Copyright of theme and framework
+  copyright: false # Copyright of theme and framework
 
 # Analysis
 # --------------------------------------
@@ -597,8 +593,8 @@ blog_title_font:
 # The setting of divider icon (水平分隔線圖標設置)
 hr_icon:
   enable: true
-  icon: # the unicode value of Font Awesome icon, such as '\3423'
-  icon-top:
+  icon: '\f197' # the unicode value of Font Awesome icon
+  icon-top: -10px
 
 # the subtitle on homepage (主頁subtitle)
 subtitle:
@@ -637,13 +633,13 @@ aside:
     enable: true
     description:
     button:
-      enable: true
+      enable: false
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/xxxxxx
+      link: https://github.com/cfy1126
   card_announcement:
     enable: true
-    content: This is my Blog
+    content:
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
@@ -675,15 +671,15 @@ aside:
 # busuanzi count for PV / UV in site
 # 訪問人數
 busuanzi:
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
-  enable: false
-  publish_date:
+  enable: true
+  publish_date: 06/11/2022 00:00:00
 
 # Aside widget - Newest Comments
 newest_comments:
@@ -913,8 +909,3 @@ CDN:
     # prismjs_js:
     # prismjs_lineNumber_js:
     # prismjs_autoloader:
-
-
-    
-
-

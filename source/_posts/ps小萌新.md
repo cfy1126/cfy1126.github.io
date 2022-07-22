@@ -2,6 +2,7 @@
 title: ps小萌新
 date: 2022-07-11 11:06:37
 tags: ps
+categories: 技术
 ---
 
 # 工具面板

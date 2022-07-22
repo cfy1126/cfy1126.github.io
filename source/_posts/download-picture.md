@@ -2,6 +2,7 @@
 title: 前端下载图片
 date: 2022-07-06 22:39:56
 tags: javascript
+categories: 技术
 ---
 
 > 前端下载api返回为图片格式

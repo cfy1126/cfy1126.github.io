@@ -2,6 +2,7 @@
 title: flex布局
 date: 2022-07-08 10:42:53
 tags: css
+categories: 技术
 ---
 
 # 用于父元素的属性

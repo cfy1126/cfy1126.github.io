@@ -2,6 +2,7 @@
 title: react中使用样式预处理less
 date: 2022-07-13 18:00:10
 tags: react
+categories: 技术
 ---
 
 `安装craco`: yarn add @craco/craco

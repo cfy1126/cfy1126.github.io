@@ -2,6 +2,7 @@
 title: react后台管理项目一
 date: 2022-07-14 08:18:57
 tags: react
+categories: 技术
 ---
 
 1. `数据库启动`：npm start
