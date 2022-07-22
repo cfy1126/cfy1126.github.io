@@ -180,7 +180,7 @@ toc:
   style_simple: false # for post
 
 post_copyright:
-  enable: true
+  enable: false
   decode: false
   author_href:
   license: CC BY-NC-SA 4.0
@@ -207,7 +207,7 @@ post_edit:
 
 # Related Articles
 related_post:
-  enable: true
+  enable: false
   limit: 6 # Number of posts displayed
   date_type: created # or created or updated 文章日期顯示創建日或者更新日
 
@@ -641,7 +641,7 @@ aside:
     enable: true
     content:
   card_recent_post:
-    enable: true
+    enable: false
     limit: 5 # if set 0 will show all
     sort: date # date or updated
     sort_order: # Don't modify the setting unless you know how it works
