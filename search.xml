@@ -4,6 +4,108 @@
   
     
     <entry>
+      <title>微信小程序基础</title>
+      <link href="/2022/07/28/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/"/>
+      <url>/2022/07/28/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><ul><li>view</li><li>text</li><li>swiper</li><li>template<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">import</span> src=<span class="string">&#x27;&#x27;</span> /&gt; <span class="comment">//导入template </span></span><br><span class="line"></span><br><span class="line">@<span class="keyword">import</span> <span class="string">&#x27;../../&#x27;</span> <span class="comment">//导入样式</span></span><br><span class="line"></span><br><span class="line">&lt;include src=<span class="string">&#x27;&#x27;</span>&gt;&lt;<span class="regexp">/include&gt; /</span><span class="regexp">/导入所有结构</span></span><br></pre></td></tr></table></figure></li></ul><h1 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h1><ul><li>wx:if</li><li>wx:elif</li><li>wx:else</li><li>wx:for </li><li>wx:key</li></ul><h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><ul><li>bandtap </li><li>catchbind 无冒泡</li></ul><h1 id="导入导出"><a href="#导入导出" class="headerlink" title="导入导出"></a>导入导出</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导出</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    get,</span><br><span class="line">    post,</span><br><span class="line">    put,</span><br><span class="line">    remove,</span><br><span class="line">    uploadFile</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入</span></span><br><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">&#x27;./request&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//wxml导入.wxs  </span></span><br><span class="line">&lt;wxs src=<span class="string">&#x27;&#x27;</span> <span class="variable language_">module</span> = <span class="string">&#x27;data&#x27;</span>&gt;&lt;/wxs&gt;</span><br></pre></td></tr></table></figure><h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h1><p><code>结构</code><br><img src="/../img/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/i.png"></p><p><code>使用</code></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;usingComponents&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;title-com&quot;</span>: <span class="string">&quot;/components/titleCom/index&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> wechat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>接网线</title>
+      <link href="/2022/07/28/%E6%8E%A5%E7%BD%91%E7%BA%BF/"/>
+      <url>/2022/07/28/%E6%8E%A5%E7%BD%91%E7%BA%BF/</url>
+      
+        <content type="html"><![CDATA[<h1 id="接光猫的LAN口"><a href="#接光猫的LAN口" class="headerlink" title="接光猫的LAN口"></a>接光猫的LAN口</h1><h1 id="路由器WAN口"><a href="#路由器WAN口" class="headerlink" title="路由器WAN口"></a>路由器WAN口</h1><h1 id="路由器的LAN口"><a href="#路由器的LAN口" class="headerlink" title="路由器的LAN口"></a>路由器的LAN口</h1><h1 id="笔记本插网线"><a href="#笔记本插网线" class="headerlink" title="笔记本插网线"></a>笔记本插网线</h1><h1 id="输入运营商提供的宽带账号和密码"><a href="#输入运营商提供的宽带账号和密码" class="headerlink" title="输入运营商提供的宽带账号和密码"></a>输入运营商提供的宽带账号和密码</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电脑 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>项目中使用redux</title>
+      <link href="/2022/07/25/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8redux/"/>
+      <url>/2022/07/25/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8redux/</url>
+      
+        <content type="html"><![CDATA[<h1 id="组件中使用redux"><a href="#组件中使用redux" class="headerlink" title="组件中使用redux"></a>组件中使用redux</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入react-redux插件</span></span><br><span class="line"># rect-redux核心方法</span><br><span class="line">  - <span class="title class_">Provider</span> 将状态传入组件</span><br><span class="line">  - connect 将对应的<span class="variable constant_">UI</span>组件包装成为容器组件（接收状态和更新状态都要包装成为容器组件）</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Provider</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react-redux&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&#x27;react-redux&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Provider</span> <span class="attr">store</span>=<span class="string">&#123;store&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">App</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">Provider</span>&gt;</span></span>,</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;root&#x27;</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 固定写法（状态和更新操作）</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">connect</span>(</span><br><span class="line">  <span class="function">(<span class="params">state</span>) =&gt;</span> (&#123; <span class="attr">headTitle</span>: state.<span class="property">headTitle</span> &#125;),</span><br><span class="line">  &#123;&#125;</span><br><span class="line">)(<span class="title function_">withRouter</span>(<span class="title class_">Header</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 容器组件内获取到状态</span></span><br><span class="line"><span class="keyword">const</span> title = <span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">headTitle</span></span><br></pre></td></tr></table></figure><h1 id="redux核心管理状态-store-js"><a href="#redux核心管理状态-store-js" class="headerlink" title="redux核心管理状态(store.js)"></a>redux核心管理状态(store.js)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redux最核心的管理对象store</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"><span class="comment">// redux处理异步操作</span></span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">&#x27;redux-thunk&#x27;</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">&#x27;./reducer&#x27;</span></span><br><span class="line"><span class="comment">// redux开发者工具使用</span></span><br><span class="line"><span class="keyword">import</span> &#123; composeWithDevTools &#125; <span class="keyword">from</span> <span class="string">&#x27;redux-devtools-extension&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 向外暴露store</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">createStore</span>(reducer,  <span class="title function_">composeWithDevTools</span>(<span class="title function_">applyMiddleware</span>(thunk)))</span><br></pre></td></tr></table></figure><h1 id="更新主要操作-reducer-js"><a href="#更新主要操作-reducer-js" class="headerlink" title="更新主要操作(reducer.js)"></a>更新主要操作(reducer.js)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用来根据老的state和指定的action生成返回新的stage</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> storageUtils <span class="keyword">from</span> <span class="string">&#x27;../utils/storageUtils&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="variable constant_">SET_HEAD_TITLE</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./action-types&#x27;</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用来管理头部标题的reducer函数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> initHeadTitle = <span class="string">&#x27;首页&#x27;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">headTitle</span>(<span class="params">state = initHeadTitle, action</span>) &#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.<span class="property">type</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="attr">SET_HEAD_TITLE</span>:</span><br><span class="line">      <span class="keyword">return</span> action.<span class="property">data</span></span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用来管理头部标题的reducer函数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> initUser = storageUtils.<span class="title function_">getUser</span>()</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">User</span>(<span class="params">state = initUser, action</span>) &#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.<span class="property">type</span>) &#123;</span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 向外暴露的是合并产生的总的reducer函数管理的总的state的结构：</span></span><br><span class="line"><span class="comment"> &#123;</span></span><br><span class="line"><span class="comment">  headTitle: &#x27;首页&#x27;,</span></span><br><span class="line"><span class="comment">  user: &#123;&#125;</span></span><br><span class="line"><span class="comment"> &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">combineReducers</span>(&#123;</span><br><span class="line">  headTitle,</span><br><span class="line">  <span class="title class_">User</span>,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="行为-action-js"><a href="#行为-action-js" class="headerlink" title="行为(action.js)"></a>行为(action.js)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 包含n个action creator的函数的模块</span></span><br><span class="line"><span class="comment"> * 同步action: 对象&#123;type: &#x27;xxx&#x27;, data: 数据值&#125;</span></span><br><span class="line"><span class="comment"> * 异步action: 函数 dispatch =&gt; &#123;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="variable constant_">SET_HEAD_TITLE</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./action-types&#x27;</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 设置头部标题的同步action</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">setHeadTitle</span> = (<span class="params">headTitle</span>) =&gt; (&#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="variable constant_">SET_HEAD_TITLE</span>,</span><br><span class="line">  <span class="attr">data</span>: headTitle,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h1 id="行为类型-action-types-js"><a href="#行为类型-action-types-js" class="headerlink" title="行为类型(action-types.js)"></a>行为类型(action-types.js)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 包含n个action的type常量标识名称的模块</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">SET_HEAD_TITLE</span> = <span class="string">&#x27;set_head_title&#x27;</span> <span class="comment">//设置头部标题</span></span><br></pre></td></tr></table></figure><h1 id="更新操作顺序"><a href="#更新操作顺序" class="headerlink" title="更新操作顺序"></a>更新操作顺序</h1><p>界面点击&gt;action.js&gt;reducer.js&gt;界面<br><img src="/../img/react%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/redux%E5%8E%9F%E7%90%86.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+            <tag> redux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>nginx生产环境解决跨域</title>
+      <link href="/2022/07/25/nginx%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/"/>
+      <url>/2022/07/25/nginx%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="运行nginx"><a href="#运行nginx" class="headerlink" title="运行nginx"></a>运行nginx</h1><p><img src="/../img/nginx%E6%93%8D%E4%BD%9C/i.png"></p><ul><li>路径不能有中文</li></ul><h1 id="配置转发"><a href="#配置转发" class="headerlink" title="配置转发"></a>配置转发</h1><p><img src="/../img/nginx%E6%93%8D%E4%BD%9C/o.png"></p><h1 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h1><p><code>打包</code>：<em>npm run build</em></p><p><code>查看</code>：<em>npm install -g serve</em></p><p><code>启动</code>：<em>serve build</em></p><h1 id="无跨域问题"><a href="#无跨域问题" class="headerlink" title="无跨域问题"></a>无跨域问题</h1><ul><li>打包后的前台代码全部复制到后台代码中的<code>public</code>文件夹中，然后启动后端代码，直接可以访问打包后的前台代码，前后台使用同一个端口，故无跨域问题。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>微信小程序(一)</title>
       <link href="/2022/07/22/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F(%E4%B8%80)/"/>
       <url>/2022/07/22/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F(%E4%B8%80)/</url>
